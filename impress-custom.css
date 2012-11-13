@@ -1,8 +1,8 @@
 .step {
     position: relative;
     width: 1024;
-    padding: 20px;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
     opacity: 0.2;
 
     -webkit-transition: opacity 1s;
@@ -25,22 +25,25 @@
 h1 {
     font-size: 200px;
     line-height: 250px;
+    margin-left: 40px;
 }
 
 h2 {
-    font-size: 100px;
+    font-size: 90px;
     line-height: 125px;
+    margin-left: 40px;
 }
 
 h3 {
     font-size: 70px;
     line-height: 100px;
-    margin-bottom: 40px;
+    margin-left: 40px;
 }
 
 p {
     font-size: 70px;
     line-height: 90px;
+    margin-left: 40px;
 }
 
 pre {
@@ -48,12 +51,13 @@ pre {
     line-height: 30px;
     border: none;
     background-color: transparent;
-    margin: 0px;
     padding: 0px;
+    margin-left: 40px;
 }
 
 pre.prettyprint {
     border: none;
+    margin-left: 40px;
 }
 
 .impress-on-zigsnake-overview-code .step {
@@ -68,10 +72,12 @@ li {
     font-size: 75px;
     line-height: 100px;
     list-style-type: none;
+    margin-left: 40px;
 }
 
 .center {
     text-align: center;
+    margin-left: 0px;
 }
 
 img.center {
