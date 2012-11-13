@@ -70,27 +70,27 @@
             <!-- TODO: break this code sampele into separately highlightable sections -->
             <div class="step" data-x="5500" data-y="200" data-scale="0.05">
                 <pre class="prettyprint" lang-python>
-    import unittest
-    from widget import Widget
+import unittest
+from widget import Widget
 
-    class WidgetTestCase(unittest.TestCase):
-        def setUp(self):
-            self.widget = Widget('The widget')
+class WidgetTestCase(unittest.TestCase):
+    def setUp(self):
+        self.widget = Widget('The widget')
 
-        def tearDown(self):
-            self.widget.dispose()
-            self.widget = None
+    def tearDown(self):
+        self.widget.dispose()
+        self.widget = None
 
-        def test_default_size(self):
-            self.assertEqual(self.widget.size(), (50,50),
-                             'incorrect default size')
+    def test_default_size(self):
+        self.assertEqual(self.widget.size(), (50,50),
+                         'incorrect default size')
 
-        def test_resize(self):
-            self.widget.resize(100,150)
-            self.assertEqual(self.widget.size(), (100,150),
-                             'wrong size after resize')
-    if __name__ == '__main__':
-        unittest.main()
+    def test_resize(self):
+        self.widget.resize(100,150)
+        self.assertEqual(self.widget.size(), (100,150),
+                         'wrong size after resize')
+if __name__ == '__main__':
+    unittest.main()
                 </pre>
             </div>
             <div class="step" data-x="5300" data-y="300" data-scale="0.05">
@@ -101,35 +101,46 @@
             </div>
             <div class="step" data-x="5400" data-y="286" data-scale="0.05">
                 <pre class="prettyprint" lang-python>
-    from zcl import ZCL
-    from zigbee import ZBController
-    import unittest
+from zcl import ZCL
+from zigbee import ZBController
+import unittest
                 </pre>
             </div>
             <div class="step" data-x="5400" data-y="296" data-scale="0.05">
                 <pre class="prettyprint" lang-python>
-    class LevelControlTestCase(unittest.TestCase):
-        def setUp(self):
-            z = ZCL(['general.xml', 'ha.xml',
-                     'ha12.xml', 'ota.xml'])
-            con = ZBController()
-            con.open(192.168.1.134)
-            con.enable_permit_join()
-            device_id = con.wait_for_join()
-            con.disable_permit_join()
+class LevelControlTestCase(unittest.TestCase):
+    def setUp(self):
+        z = ZCL(['general.xml', 'ha.xml',
+                 'ha12.xml', 'ota.xml'])
+        con = ZBController()
+        con.open(192.168.1.134)
+        con.enable_permit_join()
+        device_id = con.wait_for_join()
+        con.disable_permit_join()
                 </pre>
             </div>
             <div class="step" data-x="5400" data-y="311" data-scale="0.05">
                 <pre class="prettyprint" lang-python>
-        def test_move_to_level_updates_attribute(self):
-            desired_level = 127
-            con.send_zcl_command(
-                    device_id,
-                    z.level_control.move_to_level(
-                            desired_level, 0))
-            level = con.read_attribute(
-                    device_id, z.level_control.current_level)
-            self.assertEqual(level, desired_level)
+    def test_move_to_level_updates_attribute(self):
+        desired_level = 127
+        con.send_zcl_command(
+                device_id,
+                z.level_control.move_to_level(
+                        desired_level, 0))
+        level = con.read_attribute(
+                device_id, z.level_control.current_level)
+        self.assertEqual(level, desired_level)
+                </pre>
+            </div>
+            <div class="step" data-x="5500" data-y="296" data-scale="0.05">
+                <pre class="prettyprint" lang-python>
+class TestBasicFunctionality(DoorLockTestCase):
+    def test_unlock(self):
+        raw_input("Make sure lock is locked. Press Enter")
+        conn.send_zcl_command(z.door_lock.unlock_door(''))
+        conn.expect_zcl_command(
+                z.door_lock.unlock_door_response(success))
+        self.assertConfirm("Did the bolt unlock?")
                 </pre>
             </div>
             <div class="step" data-x="5300" data-y="400" data-scale="0.05">
